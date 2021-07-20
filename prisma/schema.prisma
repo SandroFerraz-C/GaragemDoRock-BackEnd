@@ -1,0 +1,28 @@
+datasource db {
+  provider = "mysql"
+  url  = env("DATABASE_URL")
+}
+
+generator banda {
+  provider = "prisma-client-js"
+}
+
+
+model Banda {
+  id                               Int     @id @default(autoincrement())
+  Nome                        String @unique
+  NumeroDeDiscos     Int
+  LinkSpotify              String
+  Website                     String
+
+  images Image[]
+}
+
+model Image {
+  id              Int               @id @default(autoincrement())
+
+  banda       Banda    @relation(fields: [bandaId], references: [id])
+  bandaId    Int
+
+  url            String
+}
