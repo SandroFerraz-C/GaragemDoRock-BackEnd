@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateBandaDto } from './dto/create-banda.dto';
 import { UpdateBandaDto } from './dto/update-banda.dto';
 
 @Injectable()
 export class BandasService {
+  constructor(private readonly_prisma: PrismaService){}
   create(createBandaDto: CreateBandaDto) {
     return 'This action adds a new banda';
   }
