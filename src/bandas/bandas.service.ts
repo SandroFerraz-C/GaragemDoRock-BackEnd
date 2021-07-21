@@ -5,13 +5,14 @@ import { UpdateBandaDto } from './dto/update-banda.dto';
 
 @Injectable()
 export class BandasService {
-  constructor(private readonly_prisma: PrismaService){}
-  create(createBandaDto: CreateBandaDto) {
-    return 'This action adds a new banda';
+  constructor(private readonly prisma: PrismaService){}
+
+  create(data: CreateBandaDto) {
+    return this.prisma.banda.create({data});
   }
 
   findAll() {
-    return `This action returns all bandas`;
+    return this.prisma.banda.findMany();
   }
 
   findOne(id: number) {
