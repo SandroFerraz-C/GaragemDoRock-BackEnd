@@ -16,14 +16,21 @@ export class BandasService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} banda`;
+    return this.prisma.banda.findUnique({
+      where: {id},
+    });
   }
 
-  update(id: number, updateBandaDto: UpdateBandaDto) {
-    return `This action updates a #${id} banda`;
+  update(id: number, data: UpdateBandaDto) {
+    return this.prisma.banda.update({
+      where: {id},
+      data,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} banda`;
+    return this.prisma.banda.delete({
+      where: {id},
+    });
   }
 }
