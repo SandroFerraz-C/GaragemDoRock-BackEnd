@@ -7,17 +7,37 @@ import { UpdateBandaDto } from './dto/update-banda.dto';
 export class BandasService {
   constructor(private readonly prisma: PrismaService){}
 
+  private readonly _include = {
+    
+  }
+
   create(data: CreateBandaDto) {
-    return this.prisma.banda.create({data});
+    return this.prisma.banda.create({
+      data,
+      include:{
+        images:{
+          select:{
+            url:true,
+          },
+        },
+      },
+    });
   }
 
   findAll() {
-    return this.prisma.banda.findMany();
+    return this.prisma.banda.findMany({
+      include:{
+        images:true,
+      },
+    });
   }
 
   findOne(id: number) {
     return this.prisma.banda.findUnique({
       where: {id},
+      include:{
+        images:true,
+      },
     });
   }
 
@@ -25,6 +45,9 @@ export class BandasService {
     return this.prisma.banda.update({
       where: {id},
       data,
+      include:{
+        images:true,
+      },
     });
   }
 
